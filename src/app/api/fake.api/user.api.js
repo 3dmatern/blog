@@ -26,7 +26,7 @@ const create = (payload) =>
         window.setTimeout(function () {
             const users = JSON.parse(localStorage.getItem("users"));
             const newUser = {
-                _id: users.length + 1,
+                _id: String(users.length + 1),
                 role: "USER",
                 image: `https://avatars.dicebear.com/api/avataaars/${(
                     Math.random() + 1
