@@ -19,7 +19,7 @@ const ArticlePage = () => {
                         {articleDate(article.created_at)}
                     </small>
                 </p>
-                {/* <Comments /> */}
+                <Comments articleId={articleId} />
             </div>
         </div>
     ) : (

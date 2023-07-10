@@ -1,4 +1,4 @@
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createAction, createSelector, createSlice } from "@reduxjs/toolkit";
 import api from "../api";
 
 const commentsSlice = createSlice({
@@ -81,5 +81,15 @@ export const removeComment = (commentId) => async (dispatch) => {
 export const getComments = () => (state) => state.comments.entities;
 export const getCommentsLoadingStatus = () => (state) =>
     state.comments.isLoading;
+
+export const selectComments = (state) => state.comments.entities;
+export const selectCommentsByArticleId = createSelector(
+    [selectComments, (state, articleId) => articleId],
+    (comments, articleId) => {
+        if (comments) {
+            return comments.filter((c) => c.article_id === articleId);
+        }
+    }
+);
 
 export default commentsReducer;

@@ -4,10 +4,9 @@ import { commentDate } from "../../../utils/formatDate";
 import { useSelector } from "react-redux";
 import { getCurrentUser, getUserById } from "../../../store/users";
 
-const Comment = ({ userId, created_at, content, onRemove }) => {
+const Comment = ({ user_id, created_at, content, onRemove }) => {
     const currentUser = useSelector(getCurrentUser());
-    const user = useSelector(getUserById(userId));
-    // const commentCreatedAt = new Date(created_at).getTime();
+    const user = useSelector(getUserById(user_id));
 
     return (
         <div className="bg-light card-body  mb-3">
@@ -31,7 +30,7 @@ const Comment = ({ userId, created_at, content, onRemove }) => {
                                         </span>
                                     </p>
                                     {currentUser &&
-                                        (currentUser._id === userId ||
+                                        (currentUser._id === user_id ||
                                             currentUser.role === "ADMIN") && (
                                             <button
                                                 onClick={onRemove}

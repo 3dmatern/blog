@@ -1,15 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import FormPost from "../ui/formArticle";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createArticle } from "../../store/articles";
+import { getCurrentUser } from "../../store/users";
 
 const CreateArticle = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const currentUser = useSelector(getCurrentUser());
 
     const handleSubmit = (data) => {
-        dispatch(createArticle({ payload: data, navigate }));
+        dispatch(
+            createArticle({
+                payload: { ...data, author_id: currentUser._id },
+                navigate,
+            })
+        );
     };
     return (
         <>

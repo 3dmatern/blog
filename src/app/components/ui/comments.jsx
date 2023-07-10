@@ -6,17 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../../store/users";
 import {
     createComment,
-    getComments,
     removeComment,
+    selectCommentsByArticleId,
 } from "../../store/comments";
 
-const Comments = () => {
+const Comments = ({ articleId }) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(getCurrentUser());
-    const comments = useSelector(getComments());
+    const comments = useSelector((state) =>
+        selectCommentsByArticleId(state, articleId)
+    );
 
     const handleSubmit = (data) => {
-        dispatch(createComment(data));
+        dispatch(
+            createComment({
+                ...data,
+                article_id: articleId,
+                user_id: currentUser._id,
+            })
+        );
     };
 
     const handleRemoveComment = (id) => {

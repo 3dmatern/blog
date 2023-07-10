@@ -2,9 +2,9 @@ const comments = [
     {
         _id: "1",
         article_id: "1",
-        user_id: "Стандарт c двумя кроватями",
-        content: "2 односпальные кровати • 22 м.кв.",
-        created_at: 86400,
+        user_id: "1",
+        content: "Использовал меморизацию Redux :)",
+        created_at: 1688984837343,
     },
 ];
 
@@ -18,6 +18,7 @@ const create = (payload) =>
             const comments = JSON.parse(localStorage.getItem("comments"));
             const newComment = {
                 _id: String(comments.length + 1),
+                created_at: Date.now(),
                 ...payload,
             };
             comments.push(newComment);
@@ -36,7 +37,7 @@ const get = () =>
 const remove = (id) =>
     new Promise((resolve) => {
         const comments = JSON.parse(localStorage.getItem("comments"));
-        const newComments = comments.findIndex((c) => c._id !== id);
+        const newComments = comments.filter((c) => c._id !== id);
         localStorage.setItem("comments", JSON.stringify(newComments));
         resolve(null);
     });

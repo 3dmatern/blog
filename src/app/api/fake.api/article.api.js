@@ -23,6 +23,7 @@ const create = (payload) =>
             const articles = JSON.parse(localStorage.getItem("articles"));
             const newArticle = {
                 _id: String(articles.length + 1),
+                created_at: Date.now(),
                 ...payload,
             };
             articles.push(newArticle);
@@ -43,7 +44,11 @@ const update = (id, payload) =>
         window.setTimeout(function () {
             const articles = JSON.parse(localStorage.getItem("articles"));
             const articleIndex = articles.findIndex((a) => a._id === id);
-            articles[articleIndex] = { ...articles[articleIndex], ...payload };
+            articles[articleIndex] = {
+                ...articles[articleIndex],
+                ...payload,
+                updated_at: Date.now(),
+            };
             localStorage.setItem("articles", JSON.stringify(articles));
             resolve(articles[articleIndex]);
         }, 200);
