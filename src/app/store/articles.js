@@ -71,6 +71,7 @@ export const createArticle =
             const content = await api.articles.create(payload);
             dispatch(articleCreated(content));
             navigate("/admin");
+            return content._id;
         } catch (error) {
             dispatch(articlesFailed(error.message));
         }

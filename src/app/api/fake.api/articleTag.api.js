@@ -15,12 +15,9 @@ const create = (payload) =>
             const articlesTags = JSON.parse(
                 localStorage.getItem("articlesTags")
             );
-            const newArticleTag = {
-                ...payload,
-            };
-            articlesTags.push(newArticleTag);
+            articlesTags.push(payload);
             localStorage.setItem("articlesTags", JSON.stringify(articlesTags));
-            resolve(newArticleTag);
+            resolve(payload);
         }, 200);
     });
 
@@ -31,8 +28,42 @@ const get = () =>
         }, 200);
     });
 
+const update = (payload) =>
+    new Promise((resolve) => {
+        window.setTimeout(function () {
+            const articlesTags = JSON.parse(
+                localStorage.getItem("articlesTags")
+            );
+            articlesTags[
+                articlesTags.findIndex(
+                    (a) => a.article_id === payload.article_id
+                )
+            ] = payload;
+            localStorage.setItem("articlesTags", JSON.stringify(articlesTags));
+            resolve(payload);
+        }, 200);
+    });
+
+const remove = (id) =>
+    new Promise((resolve) => {
+        window.setTimeout(function () {
+            const articlesTags = JSON.parse(
+                localStorage.getItem("articlesTags")
+            );
+            const newArticlesTags = articlesTags.filter(
+                (at) => at.article_id !== id
+            );
+            localStorage.setItem(
+                "articlesTags",
+                JSON.stringify(newArticlesTags)
+            );
+        }, 200);
+    });
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     create,
     get,
+    update,
+    remove,
 };

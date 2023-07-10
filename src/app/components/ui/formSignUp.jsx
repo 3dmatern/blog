@@ -62,7 +62,7 @@ const FormSignUp = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value,

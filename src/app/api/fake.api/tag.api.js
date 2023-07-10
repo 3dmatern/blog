@@ -1,7 +1,43 @@
 const tags = [
     {
         _id: "1",
-        name: "новость",
+        value: "sport",
+        label: "sport",
+    },
+    {
+        _id: "2",
+        value: "science",
+        label: "science",
+    },
+    {
+        _id: "3",
+        value: "game",
+        label: "game",
+    },
+    {
+        _id: "4",
+        value: "reactjs",
+        label: "reactjs",
+    },
+    {
+        _id: "5",
+        value: "redux",
+        label: "redux",
+    },
+    {
+        _id: "6",
+        value: "bootstrap",
+        label: "bootstrap",
+    },
+    {
+        _id: "7",
+        value: "html",
+        label: "html",
+    },
+    {
+        _id: "8",
+        value: "css",
+        label: "css",
     },
 ];
 

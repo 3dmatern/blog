@@ -7,6 +7,7 @@ export const useForm = (
         shortTitle: "",
         shortContent: "",
         content: "",
+        tags: [],
     },
     onSubmit
 ) => {
@@ -53,7 +54,7 @@ export const useForm = (
         if (!isValid) return;
         onSubmit(form);
     };
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setForm((prevState) => ({
             ...prevState,
             [target.name]: target.value,

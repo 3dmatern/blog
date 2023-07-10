@@ -7,6 +7,8 @@ import {
     loadUsersList,
 } from "../../../store/users";
 import { loadCommentsList } from "../../../store/comments";
+import { loadTagsList } from "../../../store/tag";
+import { loadArticleTagsList } from "../../../store/articleTag";
 
 const DataLoader = ({ children }) => {
     const dispatch = useDispatch();
@@ -17,6 +19,8 @@ const DataLoader = ({ children }) => {
         dispatch(loadArticlesList());
         dispatch(loadUsersList());
         dispatch(loadCommentsList());
+        dispatch(loadTagsList());
+        dispatch(loadArticleTagsList());
     }, [isLoggedIn]);
 
     if (usersStatusLoading) return "Loading...";

@@ -39,7 +39,7 @@ const FormSignIn = () => {
         validate();
     }, [data]);
 
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value,

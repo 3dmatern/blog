@@ -13,6 +13,9 @@ const TextAreaField = ({
     const getInputClasses = () => {
         return "form-control" + (error ? " is-invalid" : "");
     };
+    const handleChange = ({ target }) => {
+        onChange({ name: target.name, value: target.value });
+    };
     return (
         <div className="mb-3">
             <label htmlFor={name}>{label}</label>
@@ -24,7 +27,7 @@ const TextAreaField = ({
                     id={name}
                     rows={rows || "3"}
                     placeholder={placeholder}
-                    onChange={onChange}
+                    onChange={handleChange}
                 />
                 {error && <div className="invalid-feedback ">{error}</div>}
             </div>
