@@ -28,19 +28,25 @@ const get = () =>
         }, 200);
     });
 
-const update = (payload) =>
+const update = ({ article_id, payload }) =>
     new Promise((resolve) => {
         window.setTimeout(function () {
             const articlesTags = JSON.parse(
                 localStorage.getItem("articlesTags")
             );
-            articlesTags[
-                articlesTags.findIndex(
-                    (a) => a.article_id === payload.article_id
-                )
-            ] = payload;
-            localStorage.setItem("articlesTags", JSON.stringify(articlesTags));
-            resolve(payload);
+            console.log(payload);
+            const newArticlesTags = articlesTags.filter(
+                (at) => at.article_id !== article_id
+            );
+            payload.map((p) =>
+                newArticlesTags.push({ article_id, tag_id: p._id })
+            );
+            console.log(newArticlesTags);
+            localStorage.setItem(
+                "articlesTags",
+                JSON.stringify(newArticlesTags)
+            );
+            resolve(newArticlesTags);
         }, 200);
     });
 
@@ -57,6 +63,7 @@ const remove = (id) =>
                 "articlesTags",
                 JSON.stringify(newArticlesTags)
             );
+            resolve(null);
         }, 200);
     });
 

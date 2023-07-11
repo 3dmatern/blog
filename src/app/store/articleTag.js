@@ -27,9 +27,7 @@ const articleTagsSlice = createSlice({
             state.entities.push(action.payload);
         },
         articleTagUpdated: (state, action) => {
-            state.entities[
-                state.entities.findIndex((a) => a._id === action.payload._id)
-            ] = action.payload;
+            state.entities = action.payload;
         },
         articleTagRemoved: (state, action) => {
             state.entities = state.entities.filter(
@@ -73,15 +71,20 @@ export const createArticleTag = (payload) => async (dispatch) => {
     }
 };
 
-export const updateArticleTag = (payload) => async (dispatch) => {
-    dispatch(updateArticleTagReq());
-    try {
-        const content = await api.articlesTags.update(payload);
-        dispatch(articleTagUpdated(content));
-    } catch (error) {
-        dispatch(articleTagsFailed(error.message));
-    }
-};
+export const updateArticleTag =
+    ({ article_id, payload }) =>
+    async (dispatch) => {
+        dispatch(updateArticleTagReq());
+        try {
+            const content = await api.articlesTags.update({
+                article_id,
+                payload,
+            });
+            dispatch(articleTagUpdated(content));
+        } catch (error) {
+            dispatch(articleTagsFailed(error.message));
+        }
+    };
 
 export const removeArticleTag = (articleId) => async (dispatch) => {
     dispatch(removeArticleTagReq());

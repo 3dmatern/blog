@@ -45,10 +45,7 @@ const EditArticle = () => {
         const tags = data.tags;
         delete data.tags;
         dispatch(updateArticle({ payload: data, navigate }));
-
-        tags.map((t) =>
-            dispatch(updateArticleTag({ article_id: articleId, tag_id: t._id }))
-        );
+        dispatch(updateArticleTag({ article_id: articleId, payload: tags }));
     };
 
     return (
