@@ -7,7 +7,7 @@ const FormAddComment = ({ onSubmit }) => {
     const [data, setData] = useState({});
     const [errors, setErrors] = useState({});
 
-    const handleChange = ({ target }) => {
+    const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value,
@@ -34,7 +34,7 @@ const FormAddComment = ({ onSubmit }) => {
         const isValid = validate();
         if (!isValid) return;
         onSubmit(data);
-        setData({});
+        setData({ content: "" });
         setErrors({});
     };
 
@@ -43,7 +43,7 @@ const FormAddComment = ({ onSubmit }) => {
             <TextAreaField
                 label="Оставить комментарий:"
                 name="content"
-                value={data.content || ""}
+                value={data.content}
                 onChange={handleChange}
                 error={errors.content}
             />
